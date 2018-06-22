@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rjs.miaosha.mapper.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.rjs.miaosha.model.Goods">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="goods_title" jdbcType="VARCHAR" property="goodsTitle"/>
+        <result column="goods_img" jdbcType="VARCHAR" property="goodsImg"/>
+        <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice"/>
+        <result column="goods_stock" jdbcType="INTEGER" property="goodsStock"/>
+        <result column="goods_detail" jdbcType="LONGVARCHAR" property="goodsDetail"/>
+    </resultMap>
+
+    <select id="getByGoodsId" parameterType="Long" resultType="com.rjs.miaosha.vo.GoodsVO">
+        select g.*, m.miaosha_price, m.stock_count, m.start_date, m.end_date
+        from goods g left join miaosha_goods m
+        on g.id = m.goods_id
+        where g.id = #{goodsId}
+    </select>
+
+
+</mapper>
